@@ -6,3 +6,6 @@
 	path = scenario_runner
 	url = https://github.com/carla-simulator/scenario_runner.git
 	branch = leaderboard-2.0
+[submodule "fsd-agents"]
+	path = fsd-agents
+	url = https://github.com/YangyangFu/fsd-agents.git
