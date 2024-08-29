@@ -474,12 +474,11 @@ class InterfuserAgent(AutonomousAgent):
         
         traffic_meta = traffic_meta.cpu().numpy()[0]
         pred_waypoints = pred_waypoints.cpu().numpy()[0]
-        is_junction = self.softmax(is_junction).cpu().numpy().reshape(-1)[0]
+        is_junction = self.softmax(is_junction).cpu().numpy().reshape(-1)[0] # Prob of not a junction
         traffic_light_state = (
-            self.softmax(traffic_light_state).cpu().numpy().reshape(-1)[0]
+            self.softmax(traffic_light_state).cpu().numpy().reshape(-1)[0] # prob of red/yellow light
         )
-        stop_sign = self.softmax(stop_sign).cpu().numpy().reshape(-1)[0]
-        stop_sign = 0.0
+        stop_sign = self.softmax(stop_sign).cpu().numpy().reshape(-1)[0] # prob of no stop sign
 
         if self.step % 2 == 0 or self.step < 4:
             traffic_meta = self.tracker.update_and_predict(traffic_meta.reshape(20, 20, -1), tick_data['gps'], tick_data['compass'], self.step // 2)

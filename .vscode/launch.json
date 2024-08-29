@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--routes", "leaderboard/data/routes_training.xml",
+                "--routes-subset", "88",
+                "--agent", "agents/InterFuser/interfuser_agent.py",
+                "--agent-config", "agents/InterFuser/configs/interfuser_r50.py"
+            ]
+        }
+    ]
+}
