@@ -1,0 +1,1 @@
+export PYTHONPATH=$PYTHONPATH:$(pwd)/fsd-agents:$(pwd)/leaderboard:$(pwd)/scenario_runner:$(pwd)/carla
