@@ -5,10 +5,14 @@ with read_base():
 
 work_dir = '.'
 
-# If point cloud range is changed, the models should also change their point
-# cloud range accordingly
+# custom imports to trigger registration
+custom_imports = dict(
+    imports=['mmpretrain.models'],
+    allow_failed_imports=False
+)
+
 point_cloud_range = [-51.2, -51.2, -5.0, 51.2, 51.2, 3.0]
-img_norm_cfg = dict(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], to_rgb=False)
+img_norm_cfg = dict(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], to_rgb=True)
 class_names = [
 'car','van','truck','bicycle','traffic_sign','traffic_cone','traffic_light','pedestrian','others'
 ]
@@ -38,24 +42,18 @@ model = dict(
     num_queries=411,
     embed_dims=EMBED_DIMS,
     img_backbone=dict(
-        type='ResNet',
-        depth=50,
-        num_stages=4,
-        out_indices=[3],
-        deep_stem=True,
-        frozen_stages=4,
-        style='pytorch',
-        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50')
+        type='mmpretrain.TIMMBackbone', #timm model wrapper
+        model_name='resnet50d',
+        features_only=True,
+        pretrained=True,
+        out_indices=[4]
     ),
     pts_backbone=dict(
-        type='ResNet',
-        depth=18,
-        num_stages=4,
-        out_indices=[3],
-        deep_stem=True,
-        frozen_stages=4,
-        style='pytorch',
-        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet18')
+        type='mmpretrain.TIMMBackbone', #timm model wrapper
+        model_name='resnet18d',
+        features_only=True,
+        pretrained=True,
+        out_indices=[4]
     ),
     img_neck=dict(
         type='Conv1d',
@@ -127,7 +125,7 @@ model = dict(
             hidden_size=64,
             num_layers=1,
             dropout=0.,
-            batch_first=False, # seems RNNs prefer batch_first=False
+            batch_first=True,
             loss_cfg=dict(
                 type='MaskedSmoothL1Loss',
                 beta=1.0,

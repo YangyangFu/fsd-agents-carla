@@ -1,1 +1,2 @@
-export PYTHONPATH=$PYTHONPATH:$(pwd)/fsd-agents:$(pwd)/leaderboard:$(pwd)/scenario_runner:$(pwd)/carla
+export PYTHONPATH=$PYTHONPATH:$(pwd)/fsd-agents:$(pwd)/leaderboard:$(pwd)/scenario_runner:$(pwd)/carla:$(pwd)/pytorch-image-models
+#export PYTHONPATH=$PYTHONPATH:$(pwd)/fsd-agents:$(pwd)/leaderboard:$(pwd)/scenario_runner:$(pwd)/pytorch-image-models
